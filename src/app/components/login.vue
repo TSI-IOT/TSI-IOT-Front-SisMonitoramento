@@ -1,67 +1,59 @@
 <template>
-    <v-content>
-        <v-row
-                align="center"
-                justify="center"
-        >
-            <v-col
-                    cols="10"
-                    sm="10"
-                    md="3"
-            >
-                <v-card class="elevation-24"
-                        max-width="555"
-                        height="350"
-                >
-                    <v-toolbar
-                            color="#20B2AA"
-                            dark
-                            flat
-                    >
-                        <v-col
-                                cols="12"
-                                sm="12"
-                                align="center"
-                        >
-                            <v-img src="./imagem-nav-bar.png"
-                                   max-height="70"
-                                   max-width="70"
-                                   title="sim.ca"
-                            ></v-img>
-                        </v-col>
-                    </v-toolbar>
-                    <v-card-text>
-                        <v-form>
-                            <v-text-field
-                                    label="Email"
-                                    name="login"
-                                    type="text"
-                            />
-                            <v-text-field
-                                    id="password"
-                                    label="Senha"
-                                    name="password"
-                                    type="password"
-                            />
-                        </v-form>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn
-                                color="#20B2AA"
-                                class="v-btn--block"
-                                dark
-                                href="/listGroup"
-                        >Login
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-col>
+    <v-row align="center">
+        <v-row justify="space-around">
+            <v-img src="./imagem-nav-bar.png"
+                   max-width="600"
+                   title="sim.ca"
+            ></v-img>
         </v-row>
+        <v-content>
+            <v-card class="elevation-24 margin-login"
+                    max-width="400"
+                    height="400"
+                    raised
+            >
+                <v-toolbar flat>
+                    <v-row
+                            align="center"
+                            justify="center">
+                        <v-img src="./logo-login.png"
+                               max-width="150"
+                               title="sim.ca"
+                               class="margin-img"
+                        ></v-img>
+                    </v-row>
+                </v-toolbar>
+                <v-card-text>
+                    <v-form>
+                        <v-text-field
+                                label="Email"
+                                name="login"
+                                type="text"
+                                class="margin-login"
 
-    </v-content>
-
+                        />
+                        <v-text-field
+                                id="password"
+                                label="Senha"
+                                name="password"
+                                type="password"
+                                class="margin-login"
+                        />
+                    </v-form>
+                </v-card-text>
+                <v-card-actions class="margin-login">
+                    <v-btn
+                            color="#20B2AA"
+                            class="v-btn--block"
+                            dark
+                            href="/listGroup"
+                    >Login
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-content>
+    </v-row>
 </template>
-
 <script>
     export default {
         data() {
@@ -72,3 +64,12 @@
         },
     }
 </script>
+<style scoped>
+    .margin-img {
+        margin-top: 50px;
+    }
+
+    .margin-login {
+        margin-top: 25px;
+    }
+</style>

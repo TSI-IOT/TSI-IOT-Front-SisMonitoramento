@@ -1,23 +1,28 @@
 <template>
     <v-app id="inspire">
+
         <v-app-bar
                 color="#C0C0C0"
                 dark
-                height="125"
-                app
+                extended
         >
-            <v-col cols="5">
-                <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-            </v-col>
-            <v-col cols="2" center>
-                <v-img src="./imagem-nav-bar.png"
-                       max-width="150"
-                       title="sim.ca"
-                       position="right right"
-                ></v-img>
-            </v-col>
-            <v-col cols="5">
-            </v-col>
+            <v-row
+                    align="center"
+                    justify="center">
+                <v-col cols="5">
+                    <v-app-bar-nav-icon
+                            @click="drawer = true"
+                    ></v-app-bar-nav-icon>
+                </v-col>
+                <v-col cols="7">
+                    <v-img src="./logo-menu-superior.png"
+                           max-width="220"
+                           title="sim.ca"
+                           position="right right"
+                           class="margin-img-menu"
+                    ></v-img>
+                </v-col>
+            </v-row>
         </v-app-bar>
         <v-navigation-drawer
                 v-model="drawer"
@@ -85,20 +90,36 @@
             </v-container>
         </v-content>
 
-        <v-footer
-                :inset="true"
-                app
-                dark
-                color="#20B2AA"
-        >
-            <span  class="px-4">&copy; {{ new Date().getFullYear() }}</span>
+        <!--        <v-footer-->
+        <!--                :inset="true"-->
+        <!--                app-->
+        <!--                dark-->
+        <!--                color="#20B2AA"-->
+        <!--        >-->
+        <!--            <span class="px-4">&copy; {{ new Date().getFullYear() }}</span>-->
+        <!--        </v-footer>-->
+        <v-footer padless>
+
+            <v-card
+                    class=" text-center flex"
+                    color="#F8F8FF"
+
+
+            >
+                <v-card-text>
+                    Plataforma de monitoramento e controle de ambientes. Desenvolvida com o framework VueJs, buscando automatizar
+                    o monitoramento e o controle de ambientes em geral.
+                </v-card-text>
+                <v-divider></v-divider>
+                <v-card-text>
+                    {{ new Date().getFullYear() }} — <strong>sim.ca</strong>
+                </v-card-text>
+            </v-card>
         </v-footer>
     </v-app>
 </template>
 
 <script>
-
-
     export default {
         components: {},
         data() {
@@ -106,9 +127,18 @@
                 drawer: false,
                 footer: {
                     inset: false,
-                },
-
+                }
             }
         },
     }
 </script>
+<style scoped>
+    .margin-img-menu {
+        margin-top: 60px;
+    }
+
+    /*.margin-button-menu {*/
+    /*    margin-bottom: 50px;*/
+
+    /*}*/
+</style>

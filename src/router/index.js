@@ -9,7 +9,7 @@ import listGroup from "../group/views/listGroup";
 import cardDevice from "../device/views/cardDevice";
 import listDevice from "../device/views/listDevice";
 import cadDevice from "../device/views/cadDevice";
-import teste from "../app/components/teste";
+
 
 Vue.use(VueRouter);
 
@@ -52,11 +52,6 @@ const routes = [
         path: '/menu',
         name: 'menu',
         component: menu
-    },
-    {
-        path: '/teste',
-        name: 'teste',
-        component: teste
     }
 ];
 

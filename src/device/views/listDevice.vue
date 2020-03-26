@@ -11,7 +11,7 @@
                     <template v-slot:activator="{ on }">
                         <v-btn color="#C0C0C0" dark v-on="on">Novo Dispositivo</v-btn>
                     </template>
-                    <v-card>
+                    <v-card shaped>
                         <v-card-title>
                             <span class="headline">Cadastre um Novo Dispositivo</span>
                         </v-card-title>
@@ -89,6 +89,24 @@
             </v-col>
             <v-col md="3">
                 <card-device titulo="Dispositivo 07"></card-device>
+            </v-col>
+            <v-col md="3">
+                <card-device titulo="Dispositivo 08"></card-device>
+            </v-col>
+            <v-col md="3">
+                <card-device titulo="Dispositivo 09"></card-device>
+            </v-col>
+            <v-col md="3">
+                <card-device titulo="Dispositivo 10"></card-device>
+            </v-col>
+            <v-col md="3">
+                <card-device titulo="Dispositivo 11"></card-device>
+            </v-col>
+            <v-col md="3">
+                <card-device titulo="Dispositivo 12"></card-device>
+            </v-col>
+            <v-col md="3">
+                <card-device titulo="Dispositivo 13"></card-device>
             </v-col>
         </v-row>
 

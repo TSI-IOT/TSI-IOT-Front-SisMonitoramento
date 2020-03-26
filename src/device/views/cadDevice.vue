@@ -1,51 +1,58 @@
 <template>
     <v-row justify="space-around">
-        <v-card raised loading="false">
-            <v-card-title>Cadastre um Novo Dispositivo</v-card-title>
-            <v-container fluid>
-                <v-form
-                        ref="form"
-                        v-model="valid"
-                        :lazy-validation="lazy"
-                >
-
-                    <v-text-field
-                            v-model="name"
-                            :counter="30"
-                            :rules="nameRules"
-                            label="Nome"
-                            required
-                    ></v-text-field>
-                    <v-select
-                            v-model="selectDevice"
-                            :items="deviceType"
-                            :rules="[v => !!v || 'Tipo do Dispositivo é Obrigatório']"
-                            label="Tipo de Dispositivo"
-                            required
-                    ></v-select>
-
-                    <v-select
-                            v-model="selectUnitOfMeasurement"
-                            :items="unitOfMeasurement"
-                            :rules="[v => !!v || 'Unidade de Medida é Obrigatório']"
-                            label="Unidade de Medida"
-                            required
-                    ></v-select>
-
-
-                    <v-btn
-                            :disabled="!valid"
-                            color="success"
-                            class="v-btn--block"
-                            @click="salvar"
+        <v-hover
+                v-slot:default="{ hover }"
+                open-delay="200"
+        >
+            <v-card raised loading="false"
+                    :elevation="hover ? 16 : 2"
+                    class="mx-auto">
+                <v-card-title>Cadastre um Novo Dispositivo</v-card-title>
+                <v-container fluid>
+                    <v-form
+                            ref="form"
+                            v-model="valid"
+                            :lazy-validation="lazy"
                     >
-                        Salvar
-                    </v-btn>
+
+                        <v-text-field
+                                v-model="name"
+                                :counter="30"
+                                :rules="nameRules"
+                                label="Nome"
+                                required
+                        ></v-text-field>
+                        <v-select
+                                v-model="selectDevice"
+                                :items="deviceType"
+                                :rules="[v => !!v || 'Tipo do Dispositivo é Obrigatório']"
+                                label="Tipo de Dispositivo"
+                                required
+                        ></v-select>
+
+                        <v-select
+                                v-model="selectUnitOfMeasurement"
+                                :items="unitOfMeasurement"
+                                :rules="[v => !!v || 'Unidade de Medida é Obrigatório']"
+                                label="Unidade de Medida"
+                                required
+                        ></v-select>
 
 
-                </v-form>
-            </v-container>
-        </v-card>
+                        <v-btn
+                                :disabled="!valid"
+                                color="success"
+                                class="v-btn--block"
+                                @click="salvar"
+                        >
+                            Salvar
+                        </v-btn>
+
+
+                    </v-form>
+                </v-container>
+            </v-card>
+        </v-hover>
     </v-row>
 </template>
 

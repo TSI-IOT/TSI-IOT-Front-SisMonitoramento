@@ -9,7 +9,7 @@
                     <template v-slot:activator="{ on }">
                         <v-btn color="#C0C0C0" dark v-on="on">Novo Grupo</v-btn>
                     </template>
-                    <v-card>
+                    <v-card shaped>
                         <v-card-title>
                             <span class="headline">Cadastre um Novo Grupo</span>
                         </v-card-title>
