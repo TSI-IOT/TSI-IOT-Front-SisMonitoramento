@@ -49,7 +49,7 @@
                 <h1 class="linhaHori"></h1>
             </v-col>
         </v-row>
-        <v-row justify="center">
+        <v-row >
             <v-col md="3">
                 <car-group titulo="Grupo 01"></car-group>
             </v-col>

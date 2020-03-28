@@ -68,7 +68,7 @@
                 <h1 class="linhaHori"></h1>
             </v-col>
         </v-row>
-        <v-row justify="center">
+        <v-row>
             <v-col md="3">
                 <card-device titulo="Dispositivo 01"></card-device>
             </v-col>
