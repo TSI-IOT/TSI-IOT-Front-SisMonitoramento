@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 
-import login from "../app/components/login";
-import menu from "../app/components/menu";
+import login from "../app/components/Login";
+import menu from "../app/components/Menu";
 import carGroup from "../group/views/carGroup";
 import listGroup from "../group/views/listGroup";
 import cardDevice from "../device/views/cardDevice";
