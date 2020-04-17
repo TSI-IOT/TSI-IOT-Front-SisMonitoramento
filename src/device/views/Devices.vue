@@ -11,7 +11,7 @@
                     <template v-slot:activator="{ on }">
                         <v-btn color="#C0C0C0" dark v-on="on">Novo Dispositivo</v-btn>
                     </template>
-                    <v-card shaped>
+                    <v-card shaped >
                         <v-card-title>
                             <span class="headline">Cadastre um Novo Dispositivo</span>
                         </v-card-title>
@@ -114,7 +114,7 @@
 </template>
 
 <script>
-    import cardDevice from "./cardDevice";
+    import cardDevice from "../components/Device";
 
     export default {
         name: "listDevice",

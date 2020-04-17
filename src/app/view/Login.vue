@@ -3,10 +3,11 @@
         <v-row justify="space-around">
             <v-img src="../assets/imagem-nav-bar.png"
                    max-width="600"
-                   title="sim.ca"></v-img>
+                   title="sim.ca"
+            class="margin-img"></v-img>
         </v-row>
         <v-content>
-            <v-card class="elevation-24 margin-login"
+            <v-card class="elevation-24"
                     max-width="400"
                     height="400"
                     raised>
@@ -22,23 +23,23 @@
                     </v-row>
                 </v-toolbar>
                 <v-card-text>
-                    <v-form>
+                    <v-form class="margin-img">
                         <v-text-field label="Email"
                                       name="login"
                                       type="text"
-                                      class="margin-login"/>
+                                      v-model="user.email"/>
                         <v-text-field id="password"
                                       label="Senha"
                                       name="password"
                                       type="password"
-                                      class="margin-login"/>
+                                      v-model="user.password"/>
                     </v-form>
                 </v-card-text>
-                <v-card-actions class="margin-login">
+                <v-card-actions>
                     <v-btn color="#20B2AA"
                            class="v-btn--block"
                            dark
-                           href="/listGroup">Login
+                           v-on:click="authenticate">Login
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -46,13 +47,31 @@
     </v-row>
 </template>
 <script>
+    import User from "../../user/datamodel/User";
+
     export default {
         data() {
-            return {}
+            return {
+                user: new User()
+            }
         },
         props: {
             source: String,
         },
+        methods: {
+            authenticate() {
+                this.$store.dispatch('authenticate', this.user)
+                    .then(response => {
+                        response;
+                        this.$router.push("/");
+                        this.$store.commit('SUCCESS',[{msg:"Usuario Autenticado!"}]);
+                    })
+                    .catch(response => {
+                        const errors = response.data.errors;
+                        this.$store.commit('ERROR', errors);
+                    })
+            }
+        }
     }
 </script>
 <style scoped>
@@ -60,7 +79,4 @@
         margin-top: 50px;
     }
 
-    .margin-login {
-        margin-top: 25px;
-    }
 </style>

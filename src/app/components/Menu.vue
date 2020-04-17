@@ -7,7 +7,7 @@
                    dark>
 
             <!--Botão para mostrar ou esconder o menu lateral (drawer) -->
-            <v-app-bar-nav-icon v-on:click="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon v-if="show" v-on:click="drawer = !drawer"></v-app-bar-nav-icon>
 
             <!--Logotipo-->
             <v-img src="../assets/logo-simples.png"
@@ -21,6 +21,7 @@
         <v-navigation-drawer app
                              clipped
                              v-model="drawer"
+                             v-if="show"
                              :expand-on-hover="miniVariant"
                              :mini-variant="miniVariant">
             <v-list nav
@@ -32,8 +33,9 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                        <v-list-item-title>Fulano</v-list-item-title>
-                        <v-list-item-subtitle>Administrador</v-list-item-subtitle>
+                        <v-list-item-title>{{user.name}}</v-list-item-title>
+                        <v-list-item-subtitle>{{user.role}}</v-list-item-subtitle>
+                        <v-list-item-subtitle>{{user.email}}</v-list-item-subtitle>
                     </v-list-item-content>
                 </v-list-item>
 
@@ -50,21 +52,21 @@
                         <v-list-item-title>Minha Conta</v-list-item-title>
                     </v-list-item>
 
-                    <v-list-item href="/listGroup">
+                    <v-list-item to="/Groups">
                         <v-list-item-icon>
                             <v-icon>mdi-group</v-icon>
                         </v-list-item-icon>
                         <v-list-item-title>Grupos</v-list-item-title>
                     </v-list-item>
 
-                    <v-list-item href="/listDevice">
+                    <v-list-item to="/Devices">
                         <v-list-item-icon>
                             <v-icon>mdi-null</v-icon>
                         </v-list-item-icon>
                         <v-list-item-title>Dispositivos</v-list-item-title>
                     </v-list-item>
 
-                    <v-list-item href="/login">
+                    <v-list-item to="/login">
                         <v-list-item-icon>
                             <v-icon>mdi-login</v-icon>
                         </v-list-item-icon>
@@ -73,7 +75,6 @@
                 </v-list-item-group>
             </v-list>
         </v-navigation-drawer>
-
     </div>
 </template>
 
@@ -89,6 +90,17 @@
         computed: {
             miniVariant() {
                 return this.$vuetify.breakpoint.mdAndUp;
+            },
+            show() {
+                const status = this.$store.getters.authenticationStatus;
+                if (status == 'AUTHENTICATED') {
+                    return true;
+                }
+                return false;
+            },
+            user(){
+                const authenticatedUser = this.$store.getters.authenticatedUser;
+                return authenticatedUser.user;
             }
         }
     }

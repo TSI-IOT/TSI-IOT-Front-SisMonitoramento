@@ -78,7 +78,7 @@
 </template>
 
 <script>
-    import carGroup from "./carGroup";
+    import carGroup from "../components/Group";
 
     export default {
         name: "listGroup",

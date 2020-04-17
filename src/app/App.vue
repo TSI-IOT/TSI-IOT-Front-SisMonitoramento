@@ -7,6 +7,7 @@
             <!-- Conteúdo (views) -->
             <v-content>
                 <v-container fluid>
+                    <alert-notification></alert-notification>
                     <v-card color="#F8F8FF" elevation="5">
                         <v-card-text>
                             <router-view></router-view>
@@ -26,12 +27,14 @@
 <script>
     import AppMenu from "./components/Menu";
     import AppFooter from "./components/Footer";
+    import AlertNotification from "./components/AlertNotification";
 
     export default {
         name: 'App',
         components: {
             AppMenu,
-            AppFooter
+            AppFooter,
+            AlertNotification
         },
         data() {
             return {}

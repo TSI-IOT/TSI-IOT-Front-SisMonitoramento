@@ -1,5 +1,6 @@
 <template>
-    <v-footer>
+    <v-footer absolute
+              v-if="show">
             <v-col class="text-center"
                    cols="12">
                 Plataforma de monitoramento e controle de ambientes. Desenvolvida com o framework VueJs, buscando
@@ -12,7 +13,16 @@
 
 <script>
     export default {
-        name: "app-footer"
+        name: "app-footer",
+        computed: {
+            show() {
+                const status = this.$store.getters.authenticationStatus;
+                if (status == 'AUTHENTICATED') {
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 </script>
 
