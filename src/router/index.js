@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-
-
 import login from "../app/view/Login";
 import home from "../app/view/Home"
 import Groups from "../group/views/Groups";
@@ -66,4 +64,19 @@ router.beforeEach(function (to, from, next) {
 
     next('/login');
 });
+
+router.beforeEach(function (to, from, next)  {
+    if(to.path != '/login'){
+        return next();
+    }
+
+    const authenticationStatus = store.getters.authenticationStatus;
+
+    if (authenticationStatus != 'AUTHENTICATED') {
+        return next();
+    }
+
+    next('/');
+});
+
 export default router

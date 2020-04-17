@@ -3,16 +3,16 @@
         <v-snackbar top
                     v-model="showSnackbar"
                     :timeout="timeout"
-                    :color="color"
-        >
+                    :color="color">
+
             <v-container>
                 <div v-for="(message, i) in messages" v-bind:key="i">
                     {{message.msg}}
                 </div>
             </v-container>
+
             <v-btn text
-                   @click="showSnackbar = false"
-            >
+                   @click="showSnackbar = false">
                 FECHAR
             </v-btn>
         </v-snackbar>

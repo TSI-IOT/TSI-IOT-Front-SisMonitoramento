@@ -4,15 +4,12 @@
             <!-- Barra superior e menu lateral (Menu) -->
             <app-menu></app-menu>
 
+            <alert-notification></alert-notification>
+
             <!-- Conteúdo (views) -->
             <v-content>
                 <v-container fluid>
-                    <alert-notification></alert-notification>
-                    <v-card color="#F8F8FF" elevation="5">
-                        <v-card-text>
-                            <router-view></router-view>
-                        </v-card-text>
-                    </v-card>
+                    <router-view></router-view>
                 </v-container>
             </v-content>
 

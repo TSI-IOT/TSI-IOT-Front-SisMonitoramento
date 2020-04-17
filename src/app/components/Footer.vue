@@ -1,6 +1,6 @@
 <template>
     <v-footer absolute
-              v-if="show">
+              >
             <v-col class="text-center"
                    cols="12">
                 Plataforma de monitoramento e controle de ambientes. Desenvolvida com o framework VueJs, buscando

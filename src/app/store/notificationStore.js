@@ -33,8 +33,6 @@ export default {
             state.notificationMessages = messages;
             state.notificationStatus = WARNING;
         }
-
-
     },
     actions: {}
 }

@@ -1,14 +1,13 @@
 import authenticationAPI from "../service/authentication";
 
-const INITIAL = "INITIAL";
 const AUTHENTICATED = "AUTHENTICATED";
 const NO_AUTHENTICATED = "NO_AUTHENTICATED";
 const AUTHENTICATION_REJECT = "AUTHENTICATION_REJECT";
 
 export default {
     state: {
-        authenticateUser: {},
-        authenticationStatus: INITIAL
+        authenticatedUser: {},
+        authenticationStatus: NO_AUTHENTICATED
     },
     getters: {
         authenticatedUser: (state) => {
