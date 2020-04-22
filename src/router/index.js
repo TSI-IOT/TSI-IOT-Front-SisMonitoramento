@@ -35,7 +35,7 @@ const routes = [
         }
     },
     {
-        path: '/Devices',
+        path: '/Devices/id/:id',
         name: 'Devices',
         component: Devices,
         meta: {

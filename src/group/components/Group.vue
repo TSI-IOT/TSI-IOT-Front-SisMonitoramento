@@ -12,11 +12,11 @@
         >
             <v-list-item>
                 <v-list-item-content>
-                    <v-list-item-title><h2>{{titulo}}</h2></v-list-item-title>
+                    <v-list-item-title><h1>{{group.title}}</h1></v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
             <v-card-text>
-                Descrição do Grupo!
+
             </v-card-text>
 
             <v-card-actions class="justify-center">
@@ -24,6 +24,7 @@
                         onsubmit=""
                         color="#C0C0C0"
                         class="v-btn--block"
+                        v-on:click="enterGroup"
                 >
                     Entrar
                 </v-btn>
@@ -34,9 +35,16 @@
 <script>
     export default {
         name: "carGroup",
-        props: ['titulo'],
+        props: {
+            group: Object
+        },
         data() {
             return {}
+        },
+        methods: {
+            enterGroup() {
+                this.$router.push("/Devices/id/" + this.group._id);
+            }
         }
     }
 </script>

@@ -33,7 +33,7 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                        <v-list-item-title>{{user.nome}}</v-list-item-title>
+                        <v-list-item-title>{{user.name}}</v-list-item-title>
                         <v-list-item-subtitle>{{user.role}}</v-list-item-subtitle>
                     </v-list-item-content>
                 </v-list-item>
@@ -51,6 +51,13 @@
                         <v-list-item-title>Minha Conta</v-list-item-title>
                     </v-list-item>
 
+                    <v-list-item to="/">
+                        <v-list-item-icon>
+                            <v-icon>mdi-home</v-icon>
+                        </v-list-item-icon>
+                        <v-list-item-title>Home</v-list-item-title>
+                    </v-list-item>
+
                     <v-list-item to="/Groups">
                         <v-list-item-icon>
                             <v-icon>mdi-group</v-icon>
@@ -58,18 +65,11 @@
                         <v-list-item-title>Grupos</v-list-item-title>
                     </v-list-item>
 
-                    <v-list-item to="/Devices">
-                        <v-list-item-icon>
-                            <v-icon>mdi-null</v-icon>
-                        </v-list-item-icon>
-                        <v-list-item-title>Dispositivos</v-list-item-title>
-                    </v-list-item>
-
-                    <v-list-item to="/login">
+                    <v-list-item v-on:click="logout">
                         <v-list-item-icon>
                             <v-icon>mdi-login</v-icon>
                         </v-list-item-icon>
-                        <v-list-item-title>Login</v-list-item-title>
+                        <v-list-item-title>Sair</v-list-item-title>
                     </v-list-item>
                 </v-list-item-group>
             </v-list>
@@ -97,9 +97,15 @@
                 }
                 return false;
             },
-            user(){
+            user() {
                 const authenticatedUser = this.$store.getters.authenticatedUser;
                 return authenticatedUser.user;
+            }
+        }, methods: {
+            logout() {
+                this.$store.dispatch('logout', () => {
+                    this.$router.push('/login');
+                })
             }
         }
     }

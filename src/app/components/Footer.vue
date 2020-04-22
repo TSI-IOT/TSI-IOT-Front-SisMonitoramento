@@ -1,5 +1,6 @@
 <template>
     <v-footer absolute
+              v-if="show"
               >
             <v-col class="text-center"
                    cols="12">

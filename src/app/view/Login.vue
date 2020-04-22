@@ -4,7 +4,7 @@
             <v-img src="../assets/imagem-nav-bar.png"
                    max-width="600"
                    title="sim.ca"
-            class="margin-img"></v-img>
+                   class="margin-img"></v-img>
         </v-row>
         <v-content>
             <v-card class="elevation-24"
@@ -27,7 +27,8 @@
                         <v-text-field label="Email"
                                       name="login"
                                       type="text"
-                                      v-model="user.email"/>
+                                      v-model="user.email"
+                                      :color="cor"/>
                         <v-text-field id="password"
                                       label="Senha"
                                       name="password"
@@ -52,7 +53,8 @@
     export default {
         data() {
             return {
-                user: new User()
+                user: new User(),
+                cor: String
             }
         },
         props: {
@@ -61,10 +63,9 @@
         methods: {
             authenticate() {
                 this.$store.dispatch('authenticate', this.user)
-                    .then(response => {
-                        response;
+                    .then(() => {
                         this.$router.push("/");
-                        this.$store.commit('SUCCESS',[{msg:"Usuario Autenticado!"}]);
+                        this.$store.commit('SUCCESS', [{msg: "Usuario Autenticado!"}]);
                     })
                     .catch(response => {
                         const errors = response.data.errors;
@@ -77,6 +78,10 @@
 <style scoped>
     .margin-img {
         margin-top: 50px;
+    }
+
+    .colorr {
+
     }
 
 </style>

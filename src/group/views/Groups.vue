@@ -5,80 +5,26 @@
                 <h1>Grupos</h1>
             </v-col>
             <v-col cols="6" sm="6" align="right">
-                <v-dialog v-model="dialog" persistent max-width="500px">
-                    <template v-slot:activator="{ on }">
-                        <v-btn color="#C0C0C0" dark v-on="on">Novo Grupo</v-btn>
-                    </template>
-                    <v-card shaped>
-                        <v-card-title>
-                            <span class="headline">Cadastre um Novo Grupo</span>
-                        </v-card-title>
-                        <v-card-text>
-                            <v-container>
-                                <v-form
-                                        ref="form"
-                                        v-model="valid"
-                                        :lazy-validation="lazy"
-                                >
-                                    <v-text-field
-                                            v-model="title"
-                                            :counter="30"
-                                            :rules="titleRules"
-                                            label="Título"
-                                            required
-                                    ></v-text-field>
-                                    <v-btn
-                                            :disabled="!valid"
-                                            color="success"
-                                            class="v-btn--block"
-                                            @click="salvar"
-                                    >
-                                        Salvar
-                                    </v-btn>
-                                </v-form>
-                            </v-container>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" text @click="dialog = false">Fechar</v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
+                <register-group v-on:list-groups="listGroupByUserId"></register-group>
             </v-col>
             <v-col md="12">
                 <h1 class="linhaHori"></h1>
             </v-col>
         </v-row>
-        <v-row >
-            <v-col md="3">
-                <car-group titulo="Grupo 01"></car-group>
+        <v-row>
+            <v-col md="3" v-for="(group,i) in listGroups" v-bind:key="i">
+                <group :group="group"></group>
             </v-col>
-            <v-col md="3">
-                <car-group titulo="Grupo 02"></car-group>
-            </v-col>
-            <v-col md="3">
-                <car-group titulo="Grupo 03"></car-group>
-            </v-col>
-            <v-col md="3">
-                <car-group titulo="Grupo 04"></car-group>
-            </v-col>
-            <v-col md="3">
-                <car-group titulo="Grupo 05"></car-group>
-            </v-col>
-            <v-col md="3">
-                <car-group titulo="Grupo 06"></car-group>
-            </v-col>
-            <v-col md="3">
-                <car-group titulo="Grupo 07"></car-group>
-            </v-col>
-
         </v-row>
 
     </div>
 </template>
 
 <script>
-    import carGroup from "../components/Group";
+    import group from "../components/Group";
+    import RegisterGroup from "../components/RegisterGroup";
+    import listGroupByUserId from "../services/listGroupByUserId";
+    import Group from "../datamodel/Group";
 
     export default {
         name: "listGroup",
@@ -92,17 +38,29 @@
                     v => !!v || 'Título é Obrigatório',
                     v => (v && v.length <= 30) || 'O título deve ter menos de 30 caracteres',
                 ],
+                listGroups: [],
+                group: new Group()
             }
         },
         components: {
-            carGroup
+            group,
+            RegisterGroup
+        },
+        mounted() {
+            this.listGroupByUserId();
         },
         methods: {
-            salvar() {
-                // this.$router.push("/listDevice");
-            },
+            listGroupByUserId() {
+                listGroupByUserId.listGroupById()
+                    .then(response => {
+                        this.listGroups = response.data;
+                    })
+                    .catch(response => {
+                        const errors = response.data.errors;
+                        this.$store.commit('ERROR', errors);
+                    })
+            }
         },
-
     }
 </script>
 

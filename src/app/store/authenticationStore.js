@@ -1,5 +1,4 @@
 import authenticationAPI from "../service/authentication";
-
 const AUTHENTICATED = "AUTHENTICATED";
 const NO_AUTHENTICATED = "NO_AUTHENTICATED";
 const AUTHENTICATION_REJECT = "AUTHENTICATION_REJECT";
@@ -45,6 +44,11 @@ export default {
                     commit(AUTHENTICATION_REJECT);
                     throw response;
                 })
+        },
+        logout({commit}, callback){
+            sessionStorage.removeItem('authenticatedUser');
+            commit(NO_AUTHENTICATED);
+            return callback();
         }
     }
 }
