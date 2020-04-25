@@ -1,7 +1,10 @@
 <template>
-    <v-footer absolute
-              v-if="show"
-              >
+
+        <v-footer
+                  app
+                  class="font-weight-medium"
+                  v-if="show"
+        >
             <v-col class="text-center"
                    cols="12">
                 Plataforma de monitoramento e controle de ambientes. Desenvolvida com o framework VueJs, buscando
@@ -9,7 +12,8 @@
                 o monitoramento e o controle de ambientes em geral.
                 {{ new Date().getFullYear() }} — <strong>sim.ca</strong>
             </v-col>
-    </v-footer>
+        </v-footer>
+
 </template>
 
 <script>

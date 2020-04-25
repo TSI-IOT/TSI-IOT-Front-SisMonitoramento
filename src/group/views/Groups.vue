@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-content >
         <v-row justify="center">
             <v-col cols="6" sm="6">
                 <h1>Grupos</h1>
@@ -13,18 +13,18 @@
         </v-row>
         <v-row>
             <v-col md="3" v-for="(group,i) in listGroups" v-bind:key="i">
-                <group :group="group"></group>
+                <group :group="group" v-on:list-groups="listGroupByUserId"></group>
             </v-col>
         </v-row>
 
-    </div>
+    </v-content>
 </template>
 
 <script>
-    import group from "../components/Group";
-    import RegisterGroup from "../components/RegisterGroup";
-    import listGroupByUserId from "../services/listGroupByUserId";
-    import Group from "../datamodel/Group";
+    import Group from '../components/Group';
+    import RegisterGroup from '../components/RegisterGroup';
+    import listGroupByUserId from '../services/listGroupByUserId';
+
 
     export default {
         name: "listGroup",
@@ -39,11 +39,11 @@
                     v => (v && v.length <= 30) || 'O título deve ter menos de 30 caracteres',
                 ],
                 listGroups: [],
-                group: new Group()
+                group: Object
             }
         },
         components: {
-            group,
+            Group,
             RegisterGroup
         },
         mounted() {
@@ -51,7 +51,7 @@
         },
         methods: {
             listGroupByUserId() {
-                listGroupByUserId.listGroupById()
+                listGroupByUserId.listGroupsByUserId()
                     .then(response => {
                         this.listGroups = response.data;
                     })

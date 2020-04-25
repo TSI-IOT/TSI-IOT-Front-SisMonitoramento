@@ -1,12 +1,12 @@
 <template>
-
     <v-dialog v-model="dialog" persistent max-width="500px">
         <template v-slot:activator="{ on }">
-            <v-btn color="#0000CD" dark v-on="on">Novo Grupo</v-btn>
+            <v-icon v-on="on" color="#FF0000"> mdi-delete</v-icon>
         </template>
         <v-card shaped>
             <v-card-title>
-                <span class="headline">Cadastre um Novo Grupo</span>
+                <span class="headline">Você tem certeza?.</span>
+                <span class="headline">Digite <strong>{{device.name}}</strong> para confirmar.</span>
             </v-card-title>
             <v-card-text>
                 <v-container>
@@ -16,65 +16,75 @@
                             :lazy-validation="lazy"
                     >
                         <v-text-field
-                                v-model="group.title"
+                                v-model="deviceName"
                                 :counter="30"
-                                :rules="titleRules"
-                                label="Título"
+                                :rules="nameRules"
+                                label="Nome"
                                 required
                         ></v-text-field>
+
                         <v-btn
-                                :disabled="!valid"
+                                :disabled="!show"
                                 color="success"
                                 class="v-btn--block"
-                                v-on:click="createGroup"
+                                v-on:click="removeDevice"
                         >
-                            Salvar
+                            Excluir
                         </v-btn>
                     </v-form>
                 </v-container>
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">Fechar</v-btn>
+                <v-btn color="blue darken-1" text @click="dialog = false">Cancelar</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
 
 </template>
+
 <script>
-    import Group from "../datamodel/Group";
-    import createGroup from "../services/createGroup";
+    import Device from "../model/Device";
+    import removeDevice from "../services/removeDevice";
 
     export default {
-        name: "RegisterGroup",
+        name: "RemoveDevice",
         data() {
             return {
                 dialog: false,
                 valid: true,
-                title: '',
                 lazy: false,
-                titleRules: [
-                    v => !!v || 'Título é Obrigatório',
-                    v => (v && v.length <= 30) || 'O título deve ter menos de 30 caracteres',
+                nameRules: [
+                    v => !!v || 'Nome é Obrigatório',
+                    v => (v && v.length <= 30) || 'O nome deve ter no maximo 30 caracteres',
                 ],
-                listGroups: [],
-                group: new Group()
+                deviceName: ''
             }
         },
-        props: {},
+        props: {
+            device: new Device()
+        },
+        computed: {
+            show() {
+                if (this.deviceName === this.device.name) {
+                    return true;
+                }
+                return false;
+            }
+        },
         methods: {
-            createGroup() {
-                createGroup.createGroup(this.group)
+            removeDevice() {
+                removeDevice.removeDevice(this.deviceName, this.device._id)
                     .then(() => {
-                        this.group = new Group();
+                        this.deviceName = '';
                         this.dialog = false;
-                        this.$emit('list-groups');
-                        this.$store.commit('SUCCESS', [{msg: "Grupo Cadastrado com Sucesso!"}]);
+                        this.$emit('list-devices');
+                        this.$store.commit('SUCCESS', [{msg: "Dispositivo Deletado com Sucesso!"}]);
                     })
                     .catch(response => {
                         const errors = response.data.errors;
                         this.$store.commit('ERROR', errors);
-                    })
+                    });
             }
         }
     }

@@ -13,7 +13,7 @@
         </v-row>
         <v-row>
             <v-col md="3" v-for="(device,i) in this.listDevices" v-bind:key="i">
-                <device :device="device"></device>
+                <device :device="device" v-bind:socket="socket" v-on:list-devices="listDevicesByGroupId"></device>
             </v-col>
         </v-row>
 
@@ -21,11 +21,12 @@
 </template>
 
 <script>
-    import device from "../components/Device";
+    import Device from "../components/Device";
     import RegisterDevice from "../components/RegisterDevice";
     import Group from "../../group/datamodel/Group";
     import listDevicesByGroupId from "../services/listDevicesByGroupId";
     import findGroupById from "../../group/services/findGroupById";
+    import io from 'socket.io-client';
 
     export default {
         name: "Devices",
@@ -43,7 +44,9 @@
                 ],
                 group: new Group(),
                 listDevices: [],
+                listListen: [],
                 name: '',
+                dadoDev: '',
                 deviceType: [
                     'ISSUER',
                     'RECEPTOR'
@@ -54,17 +57,33 @@
                     "PERCENT",
                     "QUANTITY"
                 ],
+                socket: Object
             }
         },
         components: {
-            device,
+            Device,
             RegisterDevice
         },
         mounted() {
-            this.findGroupById();
-            this.listDevicesByGroupId()
+            this.socketIoConnect();
         },
         methods: {
+            socketIoConnect() {
+                const user = this.$store.getters.authenticatedUser;
+                const socket = io('http://127.0.0.1:5000', {
+                    query: {
+                        token: user.token,
+                        groupId: this.$route.params.id
+                    }
+                });
+
+                socket.on('connect', () => {
+                    this.socket = socket;
+                    console.log("Conectado ao Socket.Io!");
+                    this.findGroupById();
+                    this.listDevicesByGroupId();
+                });
+            },
             findGroupById() {
                 findGroupById.findGroupById(this.$route.params.id)
                     .then(response => {
@@ -96,16 +115,6 @@
     }
 
     .linhaHori {
-        width: 100%; /* coloque aqui a largura da linha */
-        border-top: 2px solid #C0C0C0;
-        list-style-type: none;
-    }
-
-    .text-emissor {
-        width: 90%;
-    }
-
-    .linhaHori2 {
         width: 100%; /* coloque aqui a largura da linha */
         border-top: 2px solid #C0C0C0;
         list-style-type: none;

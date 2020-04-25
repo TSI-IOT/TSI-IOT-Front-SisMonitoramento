@@ -58,7 +58,7 @@
                         <v-list-item-title>Home</v-list-item-title>
                     </v-list-item>
 
-                    <v-list-item to="/Groups">
+                    <v-list-item to="/groups">
                         <v-list-item-icon>
                             <v-icon>mdi-group</v-icon>
                         </v-list-item-icon>

@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialog" persistent max-width="500px">
         <template v-slot:activator="{ on }">
-            <v-btn color="#C0C0C0" dark v-on="on">Novo Dispositivo</v-btn>
+            <v-btn color="#0000CD" dark v-on="on">Novo Dispositivo</v-btn>
         </template>
         <v-card shaped>
             <v-card-title>
@@ -51,7 +51,6 @@
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="dialog = false">Fechar</v-btn>
-                <!--                            <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>-->
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -99,7 +98,7 @@
                 createDevice.createDevice(this.device)
                     .then(() => {
                         this.device = new Device;
-                        this.listDevicesByGroupId();
+                        this.$emit('list-devices');
                         this.dialog = false;
                         this.$store.commit('SUCCESS', [{msg: "Dispositivo Cadastrado com Sucesso!"}]);
                     })
@@ -107,9 +106,6 @@
                         const errors = response.data.errors;
                         this.$store.commit('ERROR', errors);
                     });
-            },
-            listDevicesByGroupId() {
-                this.$emit('list-devices')
             }
         }
     }

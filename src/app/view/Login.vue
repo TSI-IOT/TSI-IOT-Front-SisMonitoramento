@@ -28,7 +28,7 @@
                                       name="login"
                                       type="text"
                                       v-model="user.email"
-                                      :color="cor"/>
+                                      />
                         <v-text-field id="password"
                                       label="Senha"
                                       name="password"
@@ -53,8 +53,7 @@
     export default {
         data() {
             return {
-                user: new User(),
-                cor: String
+                user: new User()
             }
         },
         props: {
@@ -79,9 +78,4 @@
     .margin-img {
         margin-top: 50px;
     }
-
-    .colorr {
-
-    }
-
 </style>

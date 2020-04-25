@@ -27,7 +27,7 @@ const routes = [
         }
     },
     {
-        path: "/Groups",
+        path: "/groups",
         name: "Groups",
         component: Groups,
         meta: {
@@ -35,7 +35,7 @@ const routes = [
         }
     },
     {
-        path: '/Devices/id/:id',
+        path: '/devices/groupId/:id',
         name: 'Devices',
         component: Devices,
         meta: {
