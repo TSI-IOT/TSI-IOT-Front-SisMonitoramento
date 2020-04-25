@@ -64,7 +64,6 @@
                 this.$store.dispatch('authenticate', this.user)
                     .then(() => {
                         this.$router.push("/");
-                        this.$store.commit('SUCCESS', [{msg: "Usuario Autenticado!"}]);
                     })
                     .catch(response => {
                         const errors = response.data.errors;

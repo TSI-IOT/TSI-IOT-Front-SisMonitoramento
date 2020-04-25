@@ -4,10 +4,14 @@
             <v-icon v-on="on" v-on:click="findPassword">mdi-lock</v-icon>
         </template>
         <v-sheet class="text-center" height="200px">
-            <div class="my-3"><h2>Senha do Dispositivo</h2>
-                <strong>{{device.name}}</strong>
+            <div class="my-3">
+                <h2>Dados do Dispositivo para conexão MQTT.</h2>
             </div>
-            <div class="my-3">{{deviceFind.password}}</div>
+            <div class="my-3">
+                <label><strong>GroupID : </strong> {{device.groupId}}</label><br>
+                <label><strong>DeviceID : </strong> {{device._id}}</label><br>
+                <label><strong>Senha : </strong> {{deviceFind.password}}</label>
+            </div>
             <v-btn
                     dark
                     color="#0000CD"
