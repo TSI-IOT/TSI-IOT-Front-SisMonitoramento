@@ -2,22 +2,41 @@
     <div>
         <v-row justify="center">
             <v-col cols="6" sm="6">
-                <h1 class="d-inline pa-2">{{this.group.title}}</h1>
+                <h1 class="d-inline pa-2">Grupo {{this.group.title}}</h1>
             </v-col>
+
             <v-col cols="6" sm="6" align="right">
                 <register-device v-on:list-devices="listDevicesByGroupId" :group="this.group"></register-device>
+            </v-col>
+            <v-col cols="12">
+                <h2 class="d-inline pa-2">Receptores</h2>
             </v-col>
             <v-col cols="12">
                 <h1 class="linhaHori"></h1>
             </v-col>
         </v-row>
         <v-row>
-            <v-col md="3" v-for="(device,i) in this.listDevices" v-bind:key="i">
+            <v-col md="3" v-for="(device,i) in this.devicesReceptor" v-bind:key="i">
                 <device :device="device" v-bind:socket="socket" v-on:list-devices="listDevicesByGroupId"></device>
             </v-col>
         </v-row>
 
+
+        <v-row justify="center">
+            <v-col cols="12">
+                <h2 class="d-inline pa-2">Emissores</h2>
+            </v-col>
+            <v-col cols="12">
+                <h1 class="linhaHori"></h1>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col md="3" v-for="(device,i) in this.devicesIssuer" v-bind:key="i">
+                <device :device="device" v-bind:socket="socket" v-on:list-devices="listDevicesByGroupId"></device>
+            </v-col>
+        </v-row>
     </div>
+
 </template>
 
 <script>
@@ -63,6 +82,18 @@
         components: {
             Device,
             RegisterDevice
+        },
+        computed:{
+            devicesIssuer: function () {
+                return this.listDevices.filter(function (device) {
+                    return device.deviceType === "ISSUER";
+                })
+            },
+            devicesReceptor: function () {
+                return this.listDevices.filter(function (device) {
+                    return device.deviceType === "RECEPTOR";
+                })
+            }
         },
         mounted() {
             this.socketIoConnect();

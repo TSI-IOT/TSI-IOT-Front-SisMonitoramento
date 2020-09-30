@@ -30,6 +30,7 @@
                         ></v-select>
 
                         <v-select
+                                v-if="device.deviceType === 'RECEPTOR'"
                                 v-model="device.unitOfMeasurement"
                                 :items="unitOfMeasurement"
                                 :rules="[v => !!v || 'Unidade de Medida é Obrigatório']"
