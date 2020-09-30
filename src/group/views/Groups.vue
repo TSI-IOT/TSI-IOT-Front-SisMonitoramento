@@ -1,5 +1,5 @@
 <template>
-    <v-content >
+    <div >
         <v-row justify="center">
             <v-col cols="6" sm="6">
                 <h1>Grupos</h1>
@@ -16,8 +16,7 @@
                 <group :group="group" v-on:list-groups="listGroupByUserId"></group>
             </v-col>
         </v-row>
-
-    </v-content>
+    </div>
 </template>
 
 <script>
