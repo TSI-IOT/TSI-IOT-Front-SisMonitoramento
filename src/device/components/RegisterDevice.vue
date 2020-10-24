@@ -30,7 +30,7 @@
                         ></v-select>
 
                         <v-select
-                                v-if="device.deviceType === 'RECEPTOR'"
+                                v-if="device.deviceType === 'ISSUER'"
                                 v-model="device.unitOfMeasurement"
                                 :items="unitOfMeasurement"
                                 :rules="[v => !!v || 'Unidade de Medida é Obrigatório']"
@@ -96,6 +96,9 @@
         methods: {
             createDevice() {
                 this.device.groupId = this.group._id;
+                if (this.device.deviceType ===  'RECEPTOR') {
+                    delete this.device.unitOfMeasurement;
+                }
                 createDevice.createDevice(this.device)
                     .then(() => {
                         this.device = new Device;

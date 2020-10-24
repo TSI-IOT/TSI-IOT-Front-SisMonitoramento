@@ -66,10 +66,8 @@
         },
         computed: {
             show() {
-                if (this.deviceName === this.device.name) {
-                    return true;
-                }
-                return false;
+                return this.deviceName === this.device.name;
+
             }
         },
         methods: {
