@@ -25,3 +25,4 @@ dist
 # Backpack build
 build
 
+package-lock.json
