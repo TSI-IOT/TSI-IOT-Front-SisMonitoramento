@@ -28,12 +28,13 @@
                                       name="login"
                                       type="text"
                                       v-model="user.email"
-                                      />
+                        />
                         <v-text-field id="password"
                                       label="Senha"
                                       name="password"
                                       type="password"
-                                      v-model="user.password"/>
+                                      v-model="user.password"
+                                      v-on:keyup.enter="authenticate"/>
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
