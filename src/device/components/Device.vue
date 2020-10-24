@@ -14,16 +14,16 @@
 
             <v-toolbar-title>{{device.name}}</v-toolbar-title>
             <v-spacer></v-spacer>
-            <InputOnOff v-if="device.deviceType === 'ISSUER'"
+            <InputOnOff v-if="device.deviceType === 'RECEPTOR'"
                         :device="device"
                         v-bind:socket="socket"
                         v-on:event-On-Off="onOff"
             ></InputOnOff>
         </v-app-bar>
-        <v-card-text height="194" v-if="device.deviceType === 'RECEPTOR'">
+        <v-card-text height="194" v-if="device.deviceType === 'ISSUER'">
             <h1 class="h1-valor">{{dado}}{{unitOfMeasurement[device.unitOfMeasurement]}}</h1>
         </v-card-text>
-        <v-card-text height="194" v-if="device.deviceType === 'ISSUER'">
+        <v-card-text height="194" v-if="device.deviceType === 'RECEPTOR'">
             <h1 class="h1-valor2" v-bind:class="{text_On_Off : valorOnOff === 'Ligado'}">{{valorOnOff}}</h1>
         </v-card-text>
 
