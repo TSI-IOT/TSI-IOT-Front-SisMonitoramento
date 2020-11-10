@@ -19,14 +19,14 @@
             ></InputOnOff>
         </v-app-bar>
 
-        <v-card-text height="194" v-if="device.deviceType === 'ISSUER'">
-            <h1 class="h1-valor">{{dado}}{{unitOfMeasurement[device.unitOfMeasurement]}}</h1>
+        <v-card-text v-if="device.deviceType === 'ISSUER'">
+            <h1 class="value-issuer">{{dado}}{{unitOfMeasurement[device.unitOfMeasurement]}}</h1>
         </v-card-text>
 
-        <v-card-text height="194" v-if="device.deviceType === 'RECEPTOR'">
-            <h1 class="h1-valor" v-bind:class="{text_On_Off : valorOnOff === 'Ligado'}">{{valorOnOff}}</h1>
+        <v-card-text v-if="device.deviceType === 'RECEPTOR'">
+            <h1 class="value-receptor" v-bind:class="{text_On_Off : valorOnOff === 'Ligado'}">{{valorOnOff}}</h1>
         </v-card-text>
-        <v-divider></v-divider>
+
         <v-card-actions>
             <v-btn
                 color="#0000CD"
@@ -100,12 +100,20 @@
 </script>
 
 <style scoped>
-    .h1-valor {
+    .value-issuer {
         font-size: 38px;
         text-align: center;
         margin-top: 20px;
         margin-bottom: 10px;
     }
+
+    .value-receptor {
+      font-size: 30px;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
     .text_On_Off{
         color: #00ff00;
     }
