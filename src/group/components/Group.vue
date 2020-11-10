@@ -1,7 +1,7 @@
 <template>
     <v-card
             elevation="10"
-            max-width="344"
+
             class="mx-auto"
             color="#20B2AA"
             dark
