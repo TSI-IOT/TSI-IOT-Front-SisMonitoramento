@@ -1,42 +1,37 @@
 <template>
     <div>
-        <v-row justify="center">
-            <v-col cols="6" sm="6">
-                <h1 class="d-inline pa-2">Grupo {{this.group.title}}</h1>
+      <v-row justify="center">
+        <v-col align="left">
+          <h1 class="d-inline pa-2">Grupo {{this.group.title}}</h1>
+        </v-col>
+        <v-col align="right">
+          <register-device v-on:list-devices="listDevicesByGroupId" :group="this.group"></register-device>
+        </v-col>
+      </v-row>
+
+      <v-row v-if="devicesIssuer.length > 0">
+        <v-col>
+          <h2 class="d-inline pa-2">Sensores</h2>
+          <v-divider class="divider"></v-divider>
+          <v-row>
+            <v-col cols="12" sm="4" md="2" v-for="(device,i) in this.devicesIssuer" v-bind:key="i">
+              <device :device="device" v-bind:socket="socket" v-on:list-devices="listDevicesByGroupId"></device>
             </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
 
-            <v-col cols="6" sm="6" align="right">
-                <register-device v-on:list-devices="listDevicesByGroupId" :group="this.group"></register-device>
+      <v-row v-if="devicesReceptor.length > 0">
+        <v-col>
+          <h2 class="d-inline pa-2">Atuadores</h2>
+          <v-divider class="divider"></v-divider>
+          <v-row>
+            <v-col cols="12" sm="4" md="2" v-for="(device,i) in this.devicesReceptor" v-bind:key="i">
+              <device :device="device" v-bind:socket="socket" v-on:list-devices="listDevicesByGroupId"></device>
             </v-col>
-        </v-row>
-
-        <v-row v-if="devicesIssuer.length > 0">
-          <v-col cols="12">
-              <h2 class="d-inline pa-2">Emissores</h2>
-          </v-col>
-
-          <v-col cols="12">
-              <h1 class="linhaHori"></h1>
-          </v-col>
-
-          <v-col md="2" v-for="(device,i) in this.devicesIssuer" v-bind:key="i">
-            <device :device="device" v-bind:socket="socket" v-on:list-devices="listDevicesByGroupId"></device>
-          </v-col>
-        </v-row>
-
-        <v-row v-if="devicesReceptor.length > 0">
-          <v-col cols="12">
-            <h2 class="d-inline pa-2">Receptores</h2>
-          </v-col>
-
-          <v-col cols="12">
-            <h1 class="linhaHori"></h1>
-          </v-col>
-
-          <v-col md="2" v-for="(device,i) in this.devicesReceptor" v-bind:key="i">
-            <device :device="device" v-bind:socket="socket" v-on:list-devices="listDevicesByGroupId"></device>
-          </v-col>
-        </v-row>
+          </v-row>
+        </v-col>
+      </v-row>
     </div>
 </template>
 
@@ -137,7 +132,9 @@
                     });
             }
         },
-
+        beforeDestroy() {
+          this.socket.disconnect();
+        }
     }
 </script>
 
@@ -146,10 +143,9 @@
         color: #20B2AA;
     }
 
-    .linhaHori {
-        width: 100%; /* coloque aqui a largura da linha */
-        border-top: 2px solid #C0C0C0;
-        list-style-type: none;
+    .divider {
+      border-width: 1px;
+      border-color: #C0C0C0;
     }
 
     a {

@@ -1,21 +1,21 @@
 <template>
     <div >
-        <v-row justify="center">
-            <v-col cols="6" sm="6">
-                <h1>Grupos</h1>
-            </v-col>
-            <v-col cols="6" sm="6" align="right">
-                <register-group v-on:list-groups="listGroupByUserId"></register-group>
-            </v-col>
-            <v-col md="12">
-                <h1 class="linhaHori"></h1>
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col md="3" v-for="(group,i) in listGroups" v-bind:key="i">
-                <group :group="group" v-on:list-groups="listGroupByUserId"></group>
-            </v-col>
-        </v-row>
+      <v-row justify="center">
+        <v-col align="left">
+          <h1>Grupos</h1>
+        </v-col>
+        <v-col align="right">
+          <register-group v-on:list-groups="listGroupByUserId"></register-group>
+        </v-col>
+      </v-row>
+
+      <v-divider class="divider"></v-divider>
+
+      <v-row>
+        <v-col cols="12" sm="4" md="4" v-for="(group,i) in listGroups" v-bind:key="i">
+          <group :group="group" v-on:list-groups="listGroupByUserId"></group>
+        </v-col>
+      </v-row>
     </div>
 </template>
 
@@ -23,7 +23,6 @@
     import Group from '../components/Group';
     import RegisterGroup from '../components/RegisterGroup';
     import listGroupByUserId from '../services/listGroupByUserId';
-
 
     export default {
         name: "listGroup",
@@ -68,9 +67,8 @@
         color: #20B2AA;
     }
 
-    .linhaHori {
-        width: 100%; /* coloque aqui a largura da linha */
-        border-top: 2px solid #C0C0C0;
-        list-style-type: none;
+    .divider {
+      border-width: 1px;
+      border-color: #C0C0C0;
     }
 </style>

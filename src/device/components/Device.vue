@@ -3,12 +3,10 @@
             elevation="10"
             class="mx-auto"
             color="#20B2AA"
-            dark
-    >
+            dark>
         <v-app-bar
             height="45"
-            color="#1a8e88"
-        >
+            color="#1a8e88">
 
             <v-toolbar-title>{{device.name}}</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -30,8 +28,7 @@
         <v-card-actions>
             <v-btn
                 color="#0000CD"
-                v-on:click="publish"
-            >
+                v-on:click="publish">
                 Entrar
             </v-btn>
             <v-spacer></v-spacer>
