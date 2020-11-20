@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import register from "../app/view/Register";
 import login from "../app/view/Login";
 import home from "../app/view/Home"
 import Groups from "../group/views/Groups";
@@ -16,6 +17,14 @@ const routes = [
         component: home,
         meta: {
             authenticationRequired: true
+        }
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: register,
+        meta: {
+            authenticationRequired: false
         }
     },
     {

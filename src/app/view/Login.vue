@@ -44,6 +44,15 @@
                            v-on:click="authenticate">Login
                     </v-btn>
                 </v-card-actions>
+                <v-card-actions>
+                    <v-btn
+                            color="deep-purple"
+                            text
+                            @click="register"
+                    >
+                        QUERO ME CADASTRAR
+                    </v-btn>
+                </v-card-actions>
             </v-card>
         </v-content>
     </v-row>
@@ -70,6 +79,9 @@
                         const errors = response.data.errors;
                         this.$store.commit('ERROR', errors);
                     })
+            },
+            register() {
+                this.$router.push("/register");
             }
         }
     }
